@@ -6,9 +6,6 @@ package com.pixelsimple.commons.test.appcore.init;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.pixelsimple.appcore.ApiConfig;
-import com.pixelsimple.appcore.Registrable;
-import com.pixelsimple.appcore.RegistryService;
 import com.pixelsimple.appcore.init.AppInitializer;
 import com.pixelsimple.appcore.init.BootstrapInitializer;
 import com.pixelsimple.commons.util.OSUtils;
@@ -21,7 +18,7 @@ import com.pixelsimple.commons.util.OSUtils.OS;
  */
 public class TestAppInitializer {
 	
-	public static ApiConfig buildTestableApiConfig() {
+	public static void bootStrapRegistryForTesting() {
 		
 		Map<String, String> configs = new HashMap<String, String>();
 		
@@ -40,12 +37,12 @@ public class TestAppInitializer {
 		}
 		
 		AppInitializer initializer = new AppInitializer();
-		initializer.init(configs);
-		
-		ApiConfig config = (ApiConfig) RegistryService.getRegisteredApiConfig();
-		
-		return config;
-		
+		try {
+			initializer.init(configs);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
