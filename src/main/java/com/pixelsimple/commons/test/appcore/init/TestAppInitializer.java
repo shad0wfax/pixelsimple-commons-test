@@ -6,6 +6,10 @@ package com.pixelsimple.commons.test.appcore.init;
 import java.util.HashMap;
 import java.util.Map;
 
+import junit.framework.Assert;
+
+import org.junit.Test;
+
 import com.pixelsimple.appcore.init.AppInitializer;
 import com.pixelsimple.appcore.init.BootstrapInitializer;
 import com.pixelsimple.commons.util.OSUtils;
@@ -17,9 +21,7 @@ import com.pixelsimple.commons.util.OSUtils.OS;
  * Jan 18, 2012
  */
 public class TestAppInitializer {
-	
 	public static void bootStrapRegistryForTesting() {
-		
 		Map<String, String> configs = new HashMap<String, String>();
 		
 		if (OSUtils.CURRENT_OS == OS.WINDOWS) {
@@ -42,7 +44,15 @@ public class TestAppInitializer {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Assert.fail();
 		}
 	}
-
+	
+	/**
+	 * This test case is needed to ensure junit passes this class. 
+	 */
+	@Test
+	public void alwaysTrue() {
+		Assert.assertTrue(true);
+	}
 }
