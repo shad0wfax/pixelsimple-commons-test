@@ -12,7 +12,6 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import com.pixelsimple.commons.util.OSUtils;
-import com.pixelsimple.commons.util.OSUtils.OS;
 
 /**
  *
@@ -28,13 +27,13 @@ public class TestUtil {
 	public static Map<String, String> getTestConfig() {
 		Map<String, String> configs = new HashMap<String, String>();
 		
-		if (OSUtils.CURRENT_OS == OS.WINDOWS) {
+		if (OSUtils.isWindows()) {
 			String homeDir = "c:/dev/pixelsimple";
 			configs.put(HOME_DIR_CONFIG, homeDir);
 			configs.put(TEST_ARTIFACT_DIR_CONFIG, "c:/dev/pixelsimple/test/");
 			configs.put(FFPROBE_EXECUTABLE_CONFIG, homeDir + "/ffprobe/32_bit/0.8/ffprobe.exe"); 
 			configs.put(FFMPEG_EXECUTABLE_CONFIG, homeDir + "/ffmpeg/32_bit/0.8/ffmpeg.exe"); 
-		} else if (OSUtils.CURRENT_OS == OS.MAC) {
+		} else if (OSUtils.isMac()) {
 			String homeDir = OSUtils.USER_SYSTEM_HOME_DIR + "/dev/pixelsimple";
 			configs.put(HOME_DIR_CONFIG, homeDir);
 			configs.put(TEST_ARTIFACT_DIR_CONFIG,  OSUtils.USER_SYSTEM_HOME_DIR + "/dev/pixelsimple/test/");
