@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import com.pixelsimple.appcore.init.AppInitializer;
 import com.pixelsimple.appcore.init.BootstrapInitializer;
+import com.pixelsimple.appcore.init.Initializable;
 import com.pixelsimple.commons.util.OSUtils;
 
 /**
@@ -20,7 +21,7 @@ import com.pixelsimple.commons.util.OSUtils;
  * Jan 18, 2012
  */
 public class TestAppInitializer {
-	public static void bootStrapRegistryForTesting() {
+	public static void bootStrapRegistryForTesting(Initializable ...initializables) {
 		Map<String, String> configs = new HashMap<String, String>();
 		
 		if (OSUtils.isWindows()) {
@@ -46,6 +47,11 @@ public class TestAppInitializer {
 		configs.put("hlsFileSegmentPattern", "%06d"); 
 		
 		AppInitializer initializer = new AppInitializer();
+		
+		for (Initializable i : initializables) {
+			initializer.addModuleInitializable(i);
+		}
+		
 		try {
 			initializer.init(configs);
 		} catch (Exception e) {
