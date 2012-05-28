@@ -28,17 +28,17 @@ public class TestUtil {
 		Map<String, String> configs = new HashMap<String, String>();
 		
 		if (OSUtils.isWindows()) {
-			String homeDir = "c:/dev/pixelsimple";
+			String homeDir = "c:\\dev\\pixelsimple";
 			configs.put(HOME_DIR_CONFIG, homeDir);
-			configs.put(TEST_ARTIFACT_DIR_CONFIG, "c:/dev/pixelsimple/test/");
-			configs.put(FFPROBE_EXECUTABLE_CONFIG, homeDir + "/ffprobe/32_bit/0.8/ffprobe.exe"); 
-			configs.put(FFMPEG_EXECUTABLE_CONFIG, homeDir + "/ffmpeg/32_bit/0.8/ffmpeg.exe"); 
+			configs.put(TEST_ARTIFACT_DIR_CONFIG, "c:\\dev\\pixelsimple\\test\\");
+			configs.put(FFPROBE_EXECUTABLE_CONFIG, homeDir + "\\ffprobe\\32_bit\\1.0\\ffprobe.exe"); 
+			configs.put(FFMPEG_EXECUTABLE_CONFIG, homeDir + "\\ffmpeg\\32_bit\\1.0\\ffmpeg.exe"); 
 		} else if (OSUtils.isMac()) {
 			String homeDir = OSUtils.USER_SYSTEM_HOME_DIR + "/dev/pixelsimple";
 			configs.put(HOME_DIR_CONFIG, homeDir);
 			configs.put(TEST_ARTIFACT_DIR_CONFIG,  OSUtils.USER_SYSTEM_HOME_DIR + "/dev/pixelsimple/test/");
-			configs.put(FFPROBE_EXECUTABLE_CONFIG, homeDir + "/ffprobe/32_bit/0.7_beta2/ffprobe"); 
-			configs.put(FFMPEG_EXECUTABLE_CONFIG,  homeDir + "/ffmpeg/32_bit/0.8.7/ffmpeg"); 
+			configs.put(FFPROBE_EXECUTABLE_CONFIG, homeDir + "/ffprobe/32_bit/1.0/ffprobe"); 
+			configs.put(FFMPEG_EXECUTABLE_CONFIG,  homeDir + "/ffmpeg/32_bit/1.0/ffmpeg"); 
 		}  else {
 			// add linux based tests when ready :-)
 		}

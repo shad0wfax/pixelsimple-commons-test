@@ -13,6 +13,7 @@ import org.junit.Test;
 import com.pixelsimple.appcore.init.AppInitializer;
 import com.pixelsimple.appcore.init.BootstrapInitializer;
 import com.pixelsimple.appcore.init.Initializable;
+import com.pixelsimple.commons.test.util.TestUtil;
 import com.pixelsimple.commons.util.OSUtils;
 
 /**
@@ -21,30 +22,36 @@ import com.pixelsimple.commons.util.OSUtils;
  * Jan 18, 2012
  */
 public class TestAppInitializer {
+	public static final String TEST_ARTIFACT_DIR = TestUtil.getTestConfig().get(TestUtil.TEST_ARTIFACT_DIR_CONFIG);
+	
 	public static void bootStrapRegistryForTesting(Initializable ...initializables) {
 		Map<String, String> configs = new HashMap<String, String>();
 		
 		if (OSUtils.isWindows()) {
 			// Keep this path up to date with ffmpeg updates
-			configs.put(BootstrapInitializer.JAVA_SYS_ARG_APP_HOME_DIR, "c:/dev/pixelsimple");
-			configs.put("ffprobePath", "ffprobe/32_bit/0.8/ffprobe.exe"); 
-			configs.put("ffmpegPath", "ffmpeg/32_bit/0.8/ffmpeg.exe"); 
+			configs.put(BootstrapInitializer.JAVA_SYS_ARG_APP_HOME_DIR, "c:\\dev\\pixelsimple");
+			configs.put("ffprobePath", "ffprobe\\32_bit\\1.0\\ffprobe.exe"); 
+			configs.put("ffmpegPath", "ffmpeg\\32_bit\\1.0\\ffmpeg.exe"); 
 
 			// Will use the ffmpeg path for testing this... pain to setup a file on each dev system.
-			configs.put("hlsPlaylistGeneratorPath", "ffmpeg/32_bit/0.8/ffmpeg.exe"); 
+			configs.put("hlsPlaylistGeneratorPath", "ffmpeg\\32_bit\\1.0\\ffmpeg.exe"); 
 		} else if (OSUtils.isMac()) {
 			// Keep this path up to date with ffmpeg updates
 			configs.put(BootstrapInitializer.JAVA_SYS_ARG_APP_HOME_DIR,  OSUtils.USER_SYSTEM_HOME_DIR + "/dev/pixelsimple");
-			configs.put("ffprobePath",  "ffprobe/32_bit/0.7_beta2/ffprobe"); 
-			configs.put("ffmpegPath",  "ffmpeg/32_bit/0.8.7/ffmpeg"); 
+			configs.put("ffprobePath",  "ffprobe/32_bit/1.0/ffprobe"); 
+			configs.put("ffmpegPath",  "ffmpeg/32_bit/1.0/ffmpeg"); 
 
 			// Will use the ffmpeg path for testing this... pain to setup a file on each dev system.
-			configs.put("hlsPlaylistGeneratorPath", "ffmpeg/32_bit/0.8.7/ffmpeg"); 
+			configs.put("hlsPlaylistGeneratorPath", "ffmpeg/32_bit/1.0/ffmpeg"); 
 		}  else {
 			// add linux based tests when ready :-)
 		}
 		configs.put("hlsTranscodeCompleteFile", "pixelsimple_hls_transcode.complete"); 
 		configs.put("hlsFileSegmentPattern", "%06d"); 
+		configs.put("transcoderNinjaInputFilePattern", "\\$if"); 
+		configs.put("transcoderNinjaOutputFilePattern", "\\$of"); 
+		configs.put("transcoderNinjaVideoBitratePattern", "\\$vb"); 
+		configs.put("transcoderNinjaAudioBitratePattern", "\\$ab"); 
 		
 		AppInitializer initializer = new AppInitializer();
 		
@@ -60,6 +67,8 @@ public class TestAppInitializer {
 			Assert.fail();
 		}
 	}
+	
+	
 	
 	/**
 	 * This test case is needed to ensure junit passes this class. 
