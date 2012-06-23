@@ -32,29 +32,19 @@ public class TestAppInitializer {
 			configs.put(BootstrapInitializer.JAVA_SYS_ARG_APP_HOME_DIR, "c:\\dev\\pixelsimple");
 			configs.put("ffprobePath", "ffprobe\\32_bit\\1.0\\ffprobe.exe"); 
 			configs.put("ffmpegPath", "ffmpeg\\32_bit\\1.0\\ffmpeg.exe"); 
-
-			// Will use the ffmpeg path for testing this... pain to setup a file on each dev system.
-			configs.put("hlsPlaylistGeneratorPath", "ffmpeg\\32_bit\\1.0\\ffmpeg.exe");
-			configs.put("mediaScannerPath", "ffmpeg\\32_bit\\1.0\\ffmpeg.exe");
 		} else if (OSUtils.isMac()) {
 			// Keep this path up to date with ffmpeg updates
 			configs.put(BootstrapInitializer.JAVA_SYS_ARG_APP_HOME_DIR,  OSUtils.USER_SYSTEM_HOME_DIR + "/dev/pixelsimple");
 			configs.put("ffprobePath",  "ffprobe/32_bit/1.0/ffprobe"); 
 			configs.put("ffmpegPath",  "ffmpeg/32_bit/1.0/ffmpeg"); 
-
-			// Will use the ffmpeg path for testing this... pain to setup a file on each dev system.
-			configs.put("hlsPlaylistGeneratorPath", "ffmpeg/32_bit/1.0/ffmpeg");
-			configs.put("mediaScannerPath", "ffmpeg/32_bit/1.0/ffmpeg");
 		}  else {
 			// add linux based tests when ready :-)
 		}
-		configs.put("tempDirectory", configs.get(BootstrapInitializer.JAVA_SYS_ARG_APP_HOME_DIR) + "/tmp");
-		configs.put("hlsTranscodeCompleteFile", "pixelsimple_hls_transcode.complete"); 
-		configs.put("hlsFileSegmentPattern", "%06d"); 
-		configs.put("transcoderNinjaInputFilePattern", "\\$if"); 
-		configs.put("transcoderNinjaOutputFilePattern", "\\$of"); 
-		configs.put("transcoderNinjaVideoBitratePattern", "\\$vb"); 
-		configs.put("transcoderNinjaAudioBitratePattern", "\\$ab"); 
+		System.setProperty(BootstrapInitializer.JAVA_SYS_ARG_APP_HOME_DIR, OSUtils.appendFolderSeparator(
+				configs.get(BootstrapInitializer.JAVA_SYS_ARG_APP_HOME_DIR)));
+		
+		configs.put("tempDirectory", configs.get(BootstrapInitializer.JAVA_SYS_ARG_APP_HOME_DIR) + "/test/tmp");
+		configs.put("configDirectory", "/test/config");
 		
 		AppInitializer initializer = new AppInitializer();
 		
